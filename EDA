@@ -1,0 +1,32 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_csv("ObesityDataSet.csv")
+
+# Tampilkan 5 data pertama
+print(df.head())
+
+# Info umum
+print(df.info())
+
+# Deskripsi statistik
+print(df.describe(include='all'))
+
+# Cek missing values dan duplikat
+print("Missing values:\n", df.isnull().sum())
+print("Jumlah duplikasi data:", df.duplicated().sum())
+
+# Visualisasi distribusi target
+sns.countplot(x='NObeyesdad', data=df)
+plt.title("Distribusi Tingkat Obesitas")
+plt.xticks(rotation=45)
+plt.show()
+
+# Boxplot untuk outlier deteksi
+numeric_cols = ['Age', 'Height', 'Weight']
+for col in numeric_cols:
+    sns.boxplot(x=df[col])
+    plt.title(f'Distribusi {col}')
+    plt.show()
